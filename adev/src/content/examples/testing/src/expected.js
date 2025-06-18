@@ -1,0 +1,2 @@
+"use strict";
+/* Ignore. Satisfies static analysis of router config in app.component.router.spec.ts */

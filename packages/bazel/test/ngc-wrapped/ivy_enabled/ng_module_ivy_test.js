@@ -1,0 +1,18 @@
+"use strict";
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.dev/license
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+const runfiles_1 = require("@bazel/runfiles");
+const fs_1 = require("fs");
+describe('ng_module with ivy enabled', () => {
+    it('should generate definitions as with full compilation mode', () => {
+        const outputFile = runfiles_1.runfiles.resolveWorkspaceRelative('packages/bazel/test/ngc-wrapped/ivy_enabled/test_module_default_compilation.mjs');
+        const fileContent = (0, fs_1.readFileSync)(outputFile, 'utf8');
+        expect(fileContent).toContain(`static ɵcmp = /*@__PURE__*/ i0.ɵɵdefineComponent`);
+    });
+});

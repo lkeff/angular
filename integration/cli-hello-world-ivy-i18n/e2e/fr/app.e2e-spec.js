@@ -1,0 +1,37 @@
+"use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const app_po_1 = require("../app.po");
+const protractor_1 = require("protractor");
+describe('cli-hello-world-ivy App', () => {
+    let page;
+    beforeEach(() => {
+        page = new app_po_1.AppPage();
+        page.navigateTo();
+    });
+    it('should display title', () => {
+        expect(page.getHeading()).toEqual('Bonjour cli-hello-world-ivy-i18n!');
+    });
+    it('should display the locale', () => {
+        expect(page.getParagraph('locale')).toEqual('fr');
+    });
+    it('the date pipe should show the localized month', () => {
+        page.navigateTo();
+        expect(page.getParagraph('date')).toEqual('janvier');
+    });
+    afterEach(() => __awaiter(void 0, void 0, void 0, function* () {
+        // Assert that there are no errors emitted from the browser
+        const logs = yield protractor_1.browser.manage().logs().get(protractor_1.logging.Type.BROWSER);
+        expect(logs).not.toContain(jasmine.objectContaining({
+            level: protractor_1.logging.Level.SEVERE,
+        }));
+    }));
+});

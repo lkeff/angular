@@ -1,31 +1,157 @@
-consts: () => {
-  __i18nMsg__('{$interpolation} and {$interpolation_1}', [['interpolation', String.raw`\uFFFD0\uFFFD`], ['interpolation_1', String.raw`\uFFFD1\uFFFD`]], {original_code: {'interpolation': '{{ valueA | pipeA }}', 'interpolation_1': '{{ valueB | pipeB }}'}}, {})
-  __i18nMsg__('{$startTagSpan}{$interpolation}{$closeTagSpan} and {$interpolation_1} {$startTagSpan}and {$interpolation_2}{$closeTagSpan}', [['closeTagSpan', String.raw`[\uFFFD/#6\uFFFD|\uFFFD/#9\uFFFD]`], ['interpolation', String.raw`\uFFFD0\uFFFD`], ['interpolation_1', String.raw`\uFFFD1\uFFFD`], ['interpolation_2', String.raw`\uFFFD2\uFFFD`], ['startTagSpan', String.raw`[\uFFFD#6\uFFFD|\uFFFD#9\uFFFD]`]], {original_code: {'closeTagSpan': '</span>', 'interpolation': '{{ valueA | pipeA }}', 'interpolation_1': '{{ valueB | pipeB }}', 'interpolation_2': '{{ valueC | pipeC }}', 'startTagSpan': '<span>'}}, {})
-  …
-},
-template: function MyComponent_Template(rf, ctx) {
-  if (rf & 1) {
-    $r3$.ɵɵelementStart(0, "div");
-    $r3$.ɵɵi18n(1, 0);
-    $r3$.ɵɵpipe(2, "pipeA");
-    $r3$.ɵɵpipe(3, "pipeB");
-    $r3$.ɵɵelementEnd();
-    $r3$.ɵɵelementStart(4, "div");
-    $r3$.ɵɵi18nStart(5, 1);
-    $r3$.ɵɵelement(6, "span");
-    $r3$.ɵɵpipe(7, "pipeA");
-    $r3$.ɵɵpipe(8, "pipeB");
-    $r3$.ɵɵelement(9, "span");
-    $r3$.ɵɵpipe(10, "pipeC");
-    $r3$.ɵɵi18nEnd();
-    $r3$.ɵɵelementEnd();
-  }
-  if (rf & 2) {
-    $r3$.ɵɵadvance(3);
-    $r3$.ɵɵi18nExp($r3$.ɵɵpipeBind1(2, …, ctx.valueA))($r3$.ɵɵpipeBind1(3, …, ctx.valueB));
-    $r3$.ɵɵi18nApply(1);
-    $r3$.ɵɵadvance(7);
-    $r3$.ɵɵi18nExp($r3$.ɵɵpipeBind1(7, …, ctx.valueA))($r3$.ɵɵpipeBind1(8, …, ctx.valueB))($r3$.ɵɵpipeBind1(10, …, ctx.valueC));
-    $r3$.ɵɵi18nApply(5);
-  }
-}
+"use strict";
+var __esDecorate = (this && this.__esDecorate) || function (ctor, descriptorIn, decorators, contextIn, initializers, extraInitializers) {
+    function accept(f) { if (f !== void 0 && typeof f !== "function") throw new TypeError("Function expected"); return f; }
+    var kind = contextIn.kind, key = kind === "getter" ? "get" : kind === "setter" ? "set" : "value";
+    var target = !descriptorIn && ctor ? contextIn["static"] ? ctor : ctor.prototype : null;
+    var descriptor = descriptorIn || (target ? Object.getOwnPropertyDescriptor(target, contextIn.name) : {});
+    var _, done = false;
+    for (var i = decorators.length - 1; i >= 0; i--) {
+        var context = {};
+        for (var p in contextIn) context[p] = p === "access" ? {} : contextIn[p];
+        for (var p in contextIn.access) context.access[p] = contextIn.access[p];
+        context.addInitializer = function (f) { if (done) throw new TypeError("Cannot add initializers after decoration has completed"); extraInitializers.push(accept(f || null)); };
+        var result = (0, decorators[i])(kind === "accessor" ? { get: descriptor.get, set: descriptor.set } : descriptor[key], context);
+        if (kind === "accessor") {
+            if (result === void 0) continue;
+            if (result === null || typeof result !== "object") throw new TypeError("Object expected");
+            if (_ = accept(result.get)) descriptor.get = _;
+            if (_ = accept(result.set)) descriptor.set = _;
+            if (_ = accept(result.init)) initializers.unshift(_);
+        }
+        else if (_ = accept(result)) {
+            if (kind === "field") initializers.unshift(_);
+            else descriptor[key] = _;
+        }
+    }
+    if (target) Object.defineProperty(target, contextIn.name, descriptor);
+    done = true;
+};
+var __runInitializers = (this && this.__runInitializers) || function (thisArg, initializers, value) {
+    var useValue = arguments.length > 2;
+    for (var i = 0; i < initializers.length; i++) {
+        value = useValue ? initializers[i].call(thisArg, value) : initializers[i].call(thisArg);
+    }
+    return useValue ? value : void 0;
+};
+var __setFunctionName = (this && this.__setFunctionName) || function (f, name, prefix) {
+    if (typeof name === "symbol") name = name.description ? "[".concat(name.description, "]") : "";
+    return Object.defineProperty(f, "name", { configurable: true, value: prefix ? "".concat(prefix, " ", name) : name });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.MyModule = exports.PipeC = exports.PipeB = exports.PipeA = exports.MyComponent = void 0;
+const core_1 = require("@angular/core");
+let MyComponent = (() => {
+    let _classDecorators = [(0, core_1.Component)({
+            selector: 'my-component',
+            template: `
+  <div i18n>{{ valueA | pipeA }} and {{ valueB | pipeB }}</div>
+  <div i18n><span>{{ valueA | pipeA }}</span> and {{ valueB | pipeB }} <span>and {{ valueC | pipeC }}</span></div>
+`,
+            standalone: false
+        })];
+    let _classDescriptor;
+    let _classExtraInitializers = [];
+    let _classThis;
+    var MyComponent = _classThis = class {
+    };
+    __setFunctionName(_classThis, "MyComponent");
+    (() => {
+        const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
+        __esDecorate(null, _classDescriptor = { value: _classThis }, _classDecorators, { kind: "class", name: _classThis.name, metadata: _metadata }, null, _classExtraInitializers);
+        MyComponent = _classThis = _classDescriptor.value;
+        if (_metadata) Object.defineProperty(_classThis, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
+        __runInitializers(_classThis, _classExtraInitializers);
+    })();
+    return MyComponent = _classThis;
+})();
+exports.MyComponent = MyComponent;
+let PipeA = (() => {
+    let _classDecorators = [(0, core_1.Pipe)({
+            name: 'pipeA',
+            standalone: false
+        })];
+    let _classDescriptor;
+    let _classExtraInitializers = [];
+    let _classThis;
+    var PipeA = _classThis = class {
+        transform() {
+            return null;
+        }
+    };
+    __setFunctionName(_classThis, "PipeA");
+    (() => {
+        const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
+        __esDecorate(null, _classDescriptor = { value: _classThis }, _classDecorators, { kind: "class", name: _classThis.name, metadata: _metadata }, null, _classExtraInitializers);
+        PipeA = _classThis = _classDescriptor.value;
+        if (_metadata) Object.defineProperty(_classThis, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
+        __runInitializers(_classThis, _classExtraInitializers);
+    })();
+    return PipeA = _classThis;
+})();
+exports.PipeA = PipeA;
+let PipeB = (() => {
+    let _classDecorators = [(0, core_1.Pipe)({
+            name: 'pipeB',
+            standalone: false
+        })];
+    let _classDescriptor;
+    let _classExtraInitializers = [];
+    let _classThis;
+    var PipeB = _classThis = class {
+        transform() {
+            return null;
+        }
+    };
+    __setFunctionName(_classThis, "PipeB");
+    (() => {
+        const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
+        __esDecorate(null, _classDescriptor = { value: _classThis }, _classDecorators, { kind: "class", name: _classThis.name, metadata: _metadata }, null, _classExtraInitializers);
+        PipeB = _classThis = _classDescriptor.value;
+        if (_metadata) Object.defineProperty(_classThis, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
+        __runInitializers(_classThis, _classExtraInitializers);
+    })();
+    return PipeB = _classThis;
+})();
+exports.PipeB = PipeB;
+let PipeC = (() => {
+    let _classDecorators = [(0, core_1.Pipe)({
+            name: 'pipeC',
+            standalone: false
+        })];
+    let _classDescriptor;
+    let _classExtraInitializers = [];
+    let _classThis;
+    var PipeC = _classThis = class {
+        transform() {
+            return null;
+        }
+    };
+    __setFunctionName(_classThis, "PipeC");
+    (() => {
+        const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
+        __esDecorate(null, _classDescriptor = { value: _classThis }, _classDecorators, { kind: "class", name: _classThis.name, metadata: _metadata }, null, _classExtraInitializers);
+        PipeC = _classThis = _classDescriptor.value;
+        if (_metadata) Object.defineProperty(_classThis, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
+        __runInitializers(_classThis, _classExtraInitializers);
+    })();
+    return PipeC = _classThis;
+})();
+exports.PipeC = PipeC;
+let MyModule = (() => {
+    let _classDecorators = [(0, core_1.NgModule)({ declarations: [MyComponent, PipeA, PipeB, PipeC] })];
+    let _classDescriptor;
+    let _classExtraInitializers = [];
+    let _classThis;
+    var MyModule = _classThis = class {
+    };
+    __setFunctionName(_classThis, "MyModule");
+    (() => {
+        const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
+        __esDecorate(null, _classDescriptor = { value: _classThis }, _classDecorators, { kind: "class", name: _classThis.name, metadata: _metadata }, null, _classExtraInitializers);
+        MyModule = _classThis = _classDescriptor.value;
+        if (_metadata) Object.defineProperty(_classThis, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
+        __runInitializers(_classThis, _classExtraInitializers);
+    })();
+    return MyModule = _classThis;
+})();
+exports.MyModule = MyModule;

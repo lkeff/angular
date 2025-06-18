@@ -1,79 +1,86 @@
-const $_c0$ = [[["basic"]], "*", [["footer"]], [["structural"]]];
-const $_c1$ = ["basic", "*", "footer", "structural"];
-
-function TestComponent_ProjectionFallback_0_Template(rf, ctx) {
-  if (rf & 1) {
-    $r3$.ɵɵtext(0, "Basic fallback");
-  }
-}
-
-function TestComponent_ProjectionFallback_3_Template(rf, ctx) {
-  if (rf & 1) {
-    $r3$.ɵɵelementStart(0, "h1");
-    $r3$.ɵɵtext(1);
-    $r3$.ɵɵelementStart(2, "strong");
-    $r3$.ɵɵtext(3, "content");
-    $r3$.ɵɵelementEnd();
-    $r3$.ɵɵtext(4, "!");
-    $r3$.ɵɵelementEnd();
-  }
-  if (rf & 2) {
-    const $ctx_r0$ = $r3$.ɵɵnextContext();
-    $r3$.ɵɵadvance();
-    $r3$.ɵɵtextInterpolate1("This is ", $ctx_r0$.type, " ");
-  }
-}
-
-function TestComponent_Conditional_5_ProjectionFallback_0_Template(rf, ctx) {
-  if (rf & 1) {
-    $r3$.ɵɵtext(0, " Inside control flow ");
-  }
-}
-
-function TestComponent_Conditional_5_Template(rf, ctx) {
-  if (rf & 1) {
-    $r3$.ɵɵprojection(0, 2, null, TestComponent_Conditional_5_ProjectionFallback_0_Template, 1, 0);
-  }
-}
-
-function TestComponent_ng_content_6_ProjectionFallback_0_Template(rf, ctx) {
-  if (rf & 1) {
-    $r3$.ɵɵelementStart(0, "h2");
-    $r3$.ɵɵtext(1, "With a structural directive");
-    $r3$.ɵɵelementEnd();
-  }
-}
-
-function TestComponent_ng_content_6_Template(rf, ctx) {
-  if (rf & 1) {
-    $r3$.ɵɵprojection(0, 3, ["*ngIf", "hasStructural"], TestComponent_ng_content_6_ProjectionFallback_0_Template, 2, 0);
-  }
-}
-
-…
-
-$r3$.ɵɵdefineComponent({
-  …
-  ngContentSelectors: $_c1$,
-  decls: 7,
-  vars: 2,
-  consts: [[4, "ngIf"]],
-  template: function TestComponent_Template(rf, ctx) {
-    if (rf & 1) {
-      $r3$.ɵɵprojectionDef($_c0$);
-      $r3$.ɵɵprojection(0, 0, null, TestComponent_ProjectionFallback_0_Template, 1, 0);
-      $r3$.ɵɵelementStart(2, "div");
-      $r3$.ɵɵprojection(3, 1, null, TestComponent_ProjectionFallback_3_Template, 5, 1);
-      $r3$.ɵɵelementEnd();
-      $r3$.ɵɵconditionalCreate(5, TestComponent_Conditional_5_Template, 2, 0);
-      $r3$.ɵɵtemplate(6, TestComponent_ng_content_6_Template, 2, 0, "ng-content", 0);
+"use strict";
+var __esDecorate = (this && this.__esDecorate) || function (ctor, descriptorIn, decorators, contextIn, initializers, extraInitializers) {
+    function accept(f) { if (f !== void 0 && typeof f !== "function") throw new TypeError("Function expected"); return f; }
+    var kind = contextIn.kind, key = kind === "getter" ? "get" : kind === "setter" ? "set" : "value";
+    var target = !descriptorIn && ctor ? contextIn["static"] ? ctor : ctor.prototype : null;
+    var descriptor = descriptorIn || (target ? Object.getOwnPropertyDescriptor(target, contextIn.name) : {});
+    var _, done = false;
+    for (var i = decorators.length - 1; i >= 0; i--) {
+        var context = {};
+        for (var p in contextIn) context[p] = p === "access" ? {} : contextIn[p];
+        for (var p in contextIn.access) context.access[p] = contextIn.access[p];
+        context.addInitializer = function (f) { if (done) throw new TypeError("Cannot add initializers after decoration has completed"); extraInitializers.push(accept(f || null)); };
+        var result = (0, decorators[i])(kind === "accessor" ? { get: descriptor.get, set: descriptor.set } : descriptor[key], context);
+        if (kind === "accessor") {
+            if (result === void 0) continue;
+            if (result === null || typeof result !== "object") throw new TypeError("Object expected");
+            if (_ = accept(result.get)) descriptor.get = _;
+            if (_ = accept(result.set)) descriptor.set = _;
+            if (_ = accept(result.init)) initializers.unshift(_);
+        }
+        else if (_ = accept(result)) {
+            if (kind === "field") initializers.unshift(_);
+            else descriptor[key] = _;
+        }
     }
-    if (rf & 2) {
-      $r3$.ɵɵadvance(5);
-      $r3$.ɵɵconditional(ctx.hasFooter ? 5 : -1);
-      $r3$.ɵɵadvance();
-      $r3$.ɵɵproperty("ngIf", ctx.hasStructural);
+    if (target) Object.defineProperty(target, contextIn.name, descriptor);
+    done = true;
+};
+var __runInitializers = (this && this.__runInitializers) || function (thisArg, initializers, value) {
+    var useValue = arguments.length > 2;
+    for (var i = 0; i < initializers.length; i++) {
+        value = useValue ? initializers[i].call(thisArg, value) : initializers[i].call(thisArg);
     }
-  },
-  …
-})
+    return useValue ? value : void 0;
+};
+var __setFunctionName = (this && this.__setFunctionName) || function (f, name, prefix) {
+    if (typeof name === "symbol") name = name.description ? "[".concat(name.description, "]") : "";
+    return Object.defineProperty(f, "name", { configurable: true, value: prefix ? "".concat(prefix, " ", name) : name });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.TestComponent = void 0;
+const core_1 = require("@angular/core");
+let TestComponent = (() => {
+    let _classDecorators = [(0, core_1.Component)({
+            selector: 'test',
+            template: `
+    <ng-content select="basic">Basic fallback</ng-content>
+
+    <div>
+      <ng-content>
+        <h1>This is {{type}} <strong>content</strong>!</h1>
+      </ng-content>
+    </div>
+
+    @if (hasFooter) {
+      <ng-content select="footer">
+        Inside control flow
+      </ng-content>
+    }
+
+    <ng-content select="structural" *ngIf="hasStructural">
+      <h2>With a structural directive</h2>
+    </ng-content>
+  `
+        })];
+    let _classDescriptor;
+    let _classExtraInitializers = [];
+    let _classThis;
+    var TestComponent = _classThis = class {
+        constructor() {
+            this.type = 'complex';
+            this.hasFooter = false;
+            this.hasStructural = false;
+        }
+    };
+    __setFunctionName(_classThis, "TestComponent");
+    (() => {
+        const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
+        __esDecorate(null, _classDescriptor = { value: _classThis }, _classDecorators, { kind: "class", name: _classThis.name, metadata: _metadata }, null, _classExtraInitializers);
+        TestComponent = _classThis = _classDescriptor.value;
+        if (_metadata) Object.defineProperty(_classThis, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
+        __runInitializers(_classThis, _classExtraInitializers);
+    })();
+    return TestComponent = _classThis;
+})();
+exports.TestComponent = TestComponent;

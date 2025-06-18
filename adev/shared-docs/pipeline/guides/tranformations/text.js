@@ -1,0 +1,24 @@
+"use strict";
+/*!
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.dev/license
+ */
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.textRender = textRender;
+const emoji_regex_1 = __importDefault(require("emoji-regex"));
+/** Regex to find unicode emojis. */
+const UNICODE_EMOJI_REGEX = /&#x[\dA-Fa-f]+;/g;
+/** Regex to find emojis. */
+const regex = (0, emoji_regex_1.default)();
+function textRender(token) {
+    const text = token.tokens ? this.parser.parseInline(token.tokens) : token.text;
+    return regex.test(token.text) || UNICODE_EMOJI_REGEX.test(token.text)
+        ? `<span class="docs-emoji">${text}</span>`
+        : text;
+}

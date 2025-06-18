@@ -1,44 +1,90 @@
-
-consts: () => {
-  let $I18N_0$;
-  if (typeof ngI18nClosureMode !== "undefined" && ngI18nClosureMode) {
-    /**
-     * @suppress {msgDescriptions}
-     */
-    const $MSG_EXTERNAL_7128002169381370313$$APP_SPEC_TS_1$ = goog.getMsg("{$startTagXhtmlDiv} Count: {$startTagXhtmlSpan}5{$closeTagXhtmlSpan}{$closeTagXhtmlDiv}", {
-      "closeTagXhtmlDiv": "\uFFFD/#3\uFFFD",
-      "closeTagXhtmlSpan": "\uFFFD/#4\uFFFD",
-      "startTagXhtmlDiv": "\uFFFD#3\uFFFD",
-      "startTagXhtmlSpan": "\uFFFD#4\uFFFD"
-    }, {
-      original_code: {
-        "closeTagXhtmlDiv": "</xhtml:div>",
-        "closeTagXhtmlSpan": "</span>",
-        "startTagXhtmlDiv": "<xhtml:div xmlns=\"http://www.w3.org/1999/xhtml\">",
-        "startTagXhtmlSpan": "<span>"
-      }
-    });
-    $I18N_0$ = $MSG_EXTERNAL_7128002169381370313$$APP_SPEC_TS_1$;
-  }
-  else {
-    $I18N_0$ = $localize `${"\uFFFD#3\uFFFD"}:START_TAG__XHTML_DIV: Count: ${"\uFFFD#4\uFFFD"}:START_TAG__XHTML_SPAN:5${"\uFFFD/#4\uFFFD"}:CLOSE_TAG__XHTML_SPAN:${"\uFFFD/#3\uFFFD"}:CLOSE_TAG__XHTML_DIV:`;
-  }
-  return [
-    $i18n_0$,
-    ["xmlns", "http://www.w3.org/2000/svg"],
-    ["xmlns", "http://www.w3.org/1999/xhtml"]
-  ];
-},
-template: function MyComponent_Template(rf, ctx) {
-  if (rf & 1) {
-    $r3$.ɵɵnamespaceSVG();
-    $r3$.ɵɵelementStart(0, "svg", 1)(1, "foreignObject");
-    $r3$.ɵɵi18nStart(2, 0);
-    $r3$.ɵɵnamespaceHTML();
-    $r3$.ɵɵelementStart(3, "div", 2);
-    $r3$.ɵɵelement(4, "span");
-    $r3$.ɵɵelementEnd();
-    $r3$.ɵɵi18nEnd();
-    $r3$.ɵɵelementEnd()();
-  }
-}
+"use strict";
+var __esDecorate = (this && this.__esDecorate) || function (ctor, descriptorIn, decorators, contextIn, initializers, extraInitializers) {
+    function accept(f) { if (f !== void 0 && typeof f !== "function") throw new TypeError("Function expected"); return f; }
+    var kind = contextIn.kind, key = kind === "getter" ? "get" : kind === "setter" ? "set" : "value";
+    var target = !descriptorIn && ctor ? contextIn["static"] ? ctor : ctor.prototype : null;
+    var descriptor = descriptorIn || (target ? Object.getOwnPropertyDescriptor(target, contextIn.name) : {});
+    var _, done = false;
+    for (var i = decorators.length - 1; i >= 0; i--) {
+        var context = {};
+        for (var p in contextIn) context[p] = p === "access" ? {} : contextIn[p];
+        for (var p in contextIn.access) context.access[p] = contextIn.access[p];
+        context.addInitializer = function (f) { if (done) throw new TypeError("Cannot add initializers after decoration has completed"); extraInitializers.push(accept(f || null)); };
+        var result = (0, decorators[i])(kind === "accessor" ? { get: descriptor.get, set: descriptor.set } : descriptor[key], context);
+        if (kind === "accessor") {
+            if (result === void 0) continue;
+            if (result === null || typeof result !== "object") throw new TypeError("Object expected");
+            if (_ = accept(result.get)) descriptor.get = _;
+            if (_ = accept(result.set)) descriptor.set = _;
+            if (_ = accept(result.init)) initializers.unshift(_);
+        }
+        else if (_ = accept(result)) {
+            if (kind === "field") initializers.unshift(_);
+            else descriptor[key] = _;
+        }
+    }
+    if (target) Object.defineProperty(target, contextIn.name, descriptor);
+    done = true;
+};
+var __runInitializers = (this && this.__runInitializers) || function (thisArg, initializers, value) {
+    var useValue = arguments.length > 2;
+    for (var i = 0; i < initializers.length; i++) {
+        value = useValue ? initializers[i].call(thisArg, value) : initializers[i].call(thisArg);
+    }
+    return useValue ? value : void 0;
+};
+var __setFunctionName = (this && this.__setFunctionName) || function (f, name, prefix) {
+    if (typeof name === "symbol") name = name.description ? "[".concat(name.description, "]") : "";
+    return Object.defineProperty(f, "name", { configurable: true, value: prefix ? "".concat(prefix, " ", name) : name });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.MyModule = exports.MyComponent = void 0;
+const core_1 = require("@angular/core");
+let MyComponent = (() => {
+    let _classDecorators = [(0, core_1.Component)({
+            selector: 'my-component',
+            template: `
+  <svg xmlns="http://www.w3.org/2000/svg">
+    <foreignObject i18n>
+      <xhtml:div xmlns="http://www.w3.org/1999/xhtml">
+        Count: <span>5</span>
+      </xhtml:div>
+    </foreignObject>
+  </svg>
+`,
+            standalone: false
+        })];
+    let _classDescriptor;
+    let _classExtraInitializers = [];
+    let _classThis;
+    var MyComponent = _classThis = class {
+    };
+    __setFunctionName(_classThis, "MyComponent");
+    (() => {
+        const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
+        __esDecorate(null, _classDescriptor = { value: _classThis }, _classDecorators, { kind: "class", name: _classThis.name, metadata: _metadata }, null, _classExtraInitializers);
+        MyComponent = _classThis = _classDescriptor.value;
+        if (_metadata) Object.defineProperty(_classThis, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
+        __runInitializers(_classThis, _classExtraInitializers);
+    })();
+    return MyComponent = _classThis;
+})();
+exports.MyComponent = MyComponent;
+let MyModule = (() => {
+    let _classDecorators = [(0, core_1.NgModule)({ declarations: [MyComponent] })];
+    let _classDescriptor;
+    let _classExtraInitializers = [];
+    let _classThis;
+    var MyModule = _classThis = class {
+    };
+    __setFunctionName(_classThis, "MyModule");
+    (() => {
+        const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
+        __esDecorate(null, _classDescriptor = { value: _classThis }, _classDecorators, { kind: "class", name: _classThis.name, metadata: _metadata }, null, _classExtraInitializers);
+        MyModule = _classThis = _classDescriptor.value;
+        if (_metadata) Object.defineProperty(_classThis, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
+        __runInitializers(_classThis, _classExtraInitializers);
+    })();
+    return MyModule = _classThis;
+})();
+exports.MyModule = MyModule;

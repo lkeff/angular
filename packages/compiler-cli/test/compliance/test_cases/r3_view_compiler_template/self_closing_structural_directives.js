@@ -1,69 +1,93 @@
-function MyComponent_img_2_Template(rf, ctx) {
-  if (rf & 1) {
-    i0.ɵɵi18nStart(0, 0, 1);
-    i0.ɵɵelement(1, "img");
-    i0.ɵɵi18nEnd();
-  }
-}
-function MyComponent_other_component_3_Template(rf, ctx) {
-  if (rf & 1) {
-    i0.ɵɵi18nStart(0, 0, 2);
-    i0.ɵɵelement(1, "other-component");
-    i0.ɵɵi18nEnd();
-  }
-}
-function MyComponent_4_ng_template_1_Template(rf, ctx) {
-  if (rf & 1) {
-    i0.ɵɵi18n(0, 0, 4);
-  }
-}
-function MyComponent_4_Template(rf, ctx) {
-  if (rf & 1) {
-    i0.ɵɵi18nStart(0, 0, 3);
-    i0.ɵɵtemplate(1, MyComponent_4_ng_template_1_Template, 1, 0, "ng-template");
-    i0.ɵɵi18nEnd();
-  }
-}
-function MyComponent_ng_container_5_Template(rf, ctx) {
-  if (rf & 1) {
-    i0.ɵɵi18nStart(0, 0, 5);
-    i0.ɵɵelementContainer(1);
-    i0.ɵɵi18nEnd();
-  }
-}
-function MyComponent_ng_content_6_Template(rf, ctx) {
-  if (rf & 1) {
-    i0.ɵɵi18nStart(0, 0, 6);
-    i0.ɵɵprojection(1, 0, ["*ngIf", "flag"]);
-    i0.ɵɵi18nEnd();
-  }
-}
-…
-decls: 7,
-vars: 5,
-consts: () => {
-  __i18nMsgWithPostprocess__('{$tagImg}{$startTagOtherComponent}{$closeTagOtherComponent}{$startTagNgTemplate}{$closeTagNgTemplate}{$startTagNgContainer}{$closeTagNgContainer}{$startTagNgContent}{$closeTagNgContent}', [['closeTagNgContainer', String.raw`\uFFFD/#1:5\uFFFD\uFFFD/*5:5\uFFFD`], ['closeTagNgContent', String.raw`\uFFFD/#1:6\uFFFD\uFFFD/*6:6\uFFFD`], ['closeTagNgTemplate', String.raw`[\uFFFD/*1:4\uFFFD|\uFFFD/*4:3\uFFFD]`], ['closeTagOtherComponent', String.raw`\uFFFD/#1:2\uFFFD\uFFFD/*3:2\uFFFD`], ['startTagNgContainer', String.raw`\uFFFD*5:5\uFFFD\uFFFD#1:5\uFFFD`], ['startTagNgContent', String.raw`\uFFFD*6:6\uFFFD\uFFFD#1:6\uFFFD`], ['startTagNgTemplate', String.raw`[\uFFFD*4:3\uFFFD|\uFFFD*1:4\uFFFD]`], ['startTagOtherComponent', String.raw`\uFFFD*3:2\uFFFD\uFFFD#1:2\uFFFD`], ['tagImg', String.raw`\uFFFD*2:1\uFFFD\uFFFD/*2:1\uFFFD\uFFFD#1:1\uFFFD\uFFFD/#1:1\uFFFD\uFFFD*2:1\uFFFD\uFFFD/*2:1\uFFFD`]], {original_code: { 'closeTagNgContainer': '<ng-container *ngIf=\"flag\" />', 'closeTagNgContent': '<ng-content *ngIf=\"flag\" />', 'closeTagNgTemplate': '<ng-template *ngIf=\"flag\" />', 'closeTagOtherComponent': '<other-component *ngIf=\"flag\" />', 'startTagNgContainer': '<ng-container *ngIf=\"flag\" />', 'startTagNgContent': '<ng-content *ngIf=\"flag\" />', 'startTagNgTemplate': '<ng-template *ngIf=\"flag\" />', 'startTagOtherComponent': '<other-component *ngIf=\"flag\" />', 'tagImg': '<img *ngIf=\"flag\" />'}}, {}, [])
-  return [$i18n_0$, [4, "ngIf"]];
-},
-template: function MyComponent_Template(rf, ctx) {
-  if (rf & 1) {
-    i0.ɵɵprojectionDef();
-    i0.ɵɵelementStart(0, "div");
-    i0.ɵɵi18nStart(1, 0);
-    i0.ɵɵtemplate(2, MyComponent_img_2_Template, 2, 0, "img", 1)(3, MyComponent_other_component_3_Template, 2, 0, "other-component", 1)(4, MyComponent_4_Template, 2, 0, null, 1)(5, MyComponent_ng_container_5_Template, 2, 0, "ng-container", 1)(6, MyComponent_ng_content_6_Template, 2, 0, "ng-content", 1);
-    i0.ɵɵi18nEnd();
-    i0.ɵɵelementEnd();
-  }
-  if (rf & 2) {
-    i0.ɵɵadvance(2);
-    i0.ɵɵproperty("ngIf", ctx.flag);
-    i0.ɵɵadvance();
-    i0.ɵɵproperty("ngIf", ctx.flag);
-    i0.ɵɵadvance();
-    i0.ɵɵproperty("ngIf", ctx.flag);
-    i0.ɵɵadvance();
-    i0.ɵɵproperty("ngIf", ctx.flag);
-    i0.ɵɵadvance();
-    i0.ɵɵproperty("ngIf", ctx.flag);
-  }
-}
+"use strict";
+var __esDecorate = (this && this.__esDecorate) || function (ctor, descriptorIn, decorators, contextIn, initializers, extraInitializers) {
+    function accept(f) { if (f !== void 0 && typeof f !== "function") throw new TypeError("Function expected"); return f; }
+    var kind = contextIn.kind, key = kind === "getter" ? "get" : kind === "setter" ? "set" : "value";
+    var target = !descriptorIn && ctor ? contextIn["static"] ? ctor : ctor.prototype : null;
+    var descriptor = descriptorIn || (target ? Object.getOwnPropertyDescriptor(target, contextIn.name) : {});
+    var _, done = false;
+    for (var i = decorators.length - 1; i >= 0; i--) {
+        var context = {};
+        for (var p in contextIn) context[p] = p === "access" ? {} : contextIn[p];
+        for (var p in contextIn.access) context.access[p] = contextIn.access[p];
+        context.addInitializer = function (f) { if (done) throw new TypeError("Cannot add initializers after decoration has completed"); extraInitializers.push(accept(f || null)); };
+        var result = (0, decorators[i])(kind === "accessor" ? { get: descriptor.get, set: descriptor.set } : descriptor[key], context);
+        if (kind === "accessor") {
+            if (result === void 0) continue;
+            if (result === null || typeof result !== "object") throw new TypeError("Object expected");
+            if (_ = accept(result.get)) descriptor.get = _;
+            if (_ = accept(result.set)) descriptor.set = _;
+            if (_ = accept(result.init)) initializers.unshift(_);
+        }
+        else if (_ = accept(result)) {
+            if (kind === "field") initializers.unshift(_);
+            else descriptor[key] = _;
+        }
+    }
+    if (target) Object.defineProperty(target, contextIn.name, descriptor);
+    done = true;
+};
+var __runInitializers = (this && this.__runInitializers) || function (thisArg, initializers, value) {
+    var useValue = arguments.length > 2;
+    for (var i = 0; i < initializers.length; i++) {
+        value = useValue ? initializers[i].call(thisArg, value) : initializers[i].call(thisArg);
+    }
+    return useValue ? value : void 0;
+};
+var __setFunctionName = (this && this.__setFunctionName) || function (f, name, prefix) {
+    if (typeof name === "symbol") name = name.description ? "[".concat(name.description, "]") : "";
+    return Object.defineProperty(f, "name", { configurable: true, value: prefix ? "".concat(prefix, " ", name) : name });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.MyComponent = exports.OtherComponent = void 0;
+const core_1 = require("@angular/core");
+let OtherComponent = (() => {
+    let _classDecorators = [(0, core_1.Component)({
+            selector: 'other-component',
+            template: '',
+        })];
+    let _classDescriptor;
+    let _classExtraInitializers = [];
+    let _classThis;
+    var OtherComponent = _classThis = class {
+    };
+    __setFunctionName(_classThis, "OtherComponent");
+    (() => {
+        const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
+        __esDecorate(null, _classDescriptor = { value: _classThis }, _classDecorators, { kind: "class", name: _classThis.name, metadata: _metadata }, null, _classExtraInitializers);
+        OtherComponent = _classThis = _classDescriptor.value;
+        if (_metadata) Object.defineProperty(_classThis, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
+        __runInitializers(_classThis, _classExtraInitializers);
+    })();
+    return OtherComponent = _classThis;
+})();
+exports.OtherComponent = OtherComponent;
+let MyComponent = (() => {
+    let _classDecorators = [(0, core_1.Component)({
+            selector: 'my-component',
+            imports: [OtherComponent],
+            template: `
+  <div i18n>
+    <img *ngIf="flag" />
+    <other-component *ngIf="flag" />
+    <ng-template *ngIf="flag" />
+    <ng-container *ngIf="flag" />
+    <ng-content *ngIf="flag" />
+  </div>
+`,
+        })];
+    let _classDescriptor;
+    let _classExtraInitializers = [];
+    let _classThis;
+    var MyComponent = _classThis = class {
+    };
+    __setFunctionName(_classThis, "MyComponent");
+    (() => {
+        const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
+        __esDecorate(null, _classDescriptor = { value: _classThis }, _classDecorators, { kind: "class", name: _classThis.name, metadata: _metadata }, null, _classExtraInitializers);
+        MyComponent = _classThis = _classDescriptor.value;
+        if (_metadata) Object.defineProperty(_classThis, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
+        __runInitializers(_classThis, _classExtraInitializers);
+    })();
+    return MyComponent = _classThis;
+})();
+exports.MyComponent = MyComponent;

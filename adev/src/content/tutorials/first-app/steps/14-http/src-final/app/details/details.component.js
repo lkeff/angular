@@ -1,0 +1,121 @@
+"use strict";
+var __esDecorate = (this && this.__esDecorate) || function (ctor, descriptorIn, decorators, contextIn, initializers, extraInitializers) {
+    function accept(f) { if (f !== void 0 && typeof f !== "function") throw new TypeError("Function expected"); return f; }
+    var kind = contextIn.kind, key = kind === "getter" ? "get" : kind === "setter" ? "set" : "value";
+    var target = !descriptorIn && ctor ? contextIn["static"] ? ctor : ctor.prototype : null;
+    var descriptor = descriptorIn || (target ? Object.getOwnPropertyDescriptor(target, contextIn.name) : {});
+    var _, done = false;
+    for (var i = decorators.length - 1; i >= 0; i--) {
+        var context = {};
+        for (var p in contextIn) context[p] = p === "access" ? {} : contextIn[p];
+        for (var p in contextIn.access) context.access[p] = contextIn.access[p];
+        context.addInitializer = function (f) { if (done) throw new TypeError("Cannot add initializers after decoration has completed"); extraInitializers.push(accept(f || null)); };
+        var result = (0, decorators[i])(kind === "accessor" ? { get: descriptor.get, set: descriptor.set } : descriptor[key], context);
+        if (kind === "accessor") {
+            if (result === void 0) continue;
+            if (result === null || typeof result !== "object") throw new TypeError("Object expected");
+            if (_ = accept(result.get)) descriptor.get = _;
+            if (_ = accept(result.set)) descriptor.set = _;
+            if (_ = accept(result.init)) initializers.unshift(_);
+        }
+        else if (_ = accept(result)) {
+            if (kind === "field") initializers.unshift(_);
+            else descriptor[key] = _;
+        }
+    }
+    if (target) Object.defineProperty(target, contextIn.name, descriptor);
+    done = true;
+};
+var __runInitializers = (this && this.__runInitializers) || function (thisArg, initializers, value) {
+    var useValue = arguments.length > 2;
+    for (var i = 0; i < initializers.length; i++) {
+        value = useValue ? initializers[i].call(thisArg, value) : initializers[i].call(thisArg);
+    }
+    return useValue ? value : void 0;
+};
+var __setFunctionName = (this && this.__setFunctionName) || function (f, name, prefix) {
+    if (typeof name === "symbol") name = name.description ? "[".concat(name.description, "]") : "";
+    return Object.defineProperty(f, "name", { configurable: true, value: prefix ? "".concat(prefix, " ", name) : name });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DetailsComponent = void 0;
+const core_1 = require("@angular/core");
+const common_1 = require("@angular/common");
+const router_1 = require("@angular/router");
+const housing_service_1 = require("../housing.service");
+const forms_1 = require("@angular/forms");
+let DetailsComponent = (() => {
+    let _classDecorators = [(0, core_1.Component)({
+            selector: 'app-details',
+            imports: [common_1.CommonModule, forms_1.ReactiveFormsModule],
+            template: `
+    <article>
+      <img
+        class="listing-photo"
+        [src]="housingLocation?.photo"
+        alt="Exterior photo of {{ housingLocation?.name }}"
+        crossorigin
+      />
+      <section class="listing-description">
+        <h2 class="listing-heading">{{ housingLocation?.name }}</h2>
+        <p class="listing-location">{{ housingLocation?.city }}, {{ housingLocation?.state }}</p>
+      </section>
+      <section class="listing-features">
+        <h2 class="section-heading">About this housing location</h2>
+        <ul>
+          <li>Units available: {{ housingLocation?.availableUnits }}</li>
+          <li>Does this location have wifi: {{ housingLocation?.wifi }}</li>
+          <li>Does this location have laundry: {{ housingLocation?.laundry }}</li>
+        </ul>
+      </section>
+      <section class="listing-apply">
+        <h2 class="section-heading">Apply now to live here</h2>
+        <form [formGroup]="applyForm" (submit)="submitApplication()">
+          <label for="first-name">First Name</label>
+          <input id="first-name" type="text" formControlName="firstName" />
+
+          <label for="last-name">Last Name</label>
+          <input id="last-name" type="text" formControlName="lastName" />
+
+          <label for="email">Email</label>
+          <input id="email" type="email" formControlName="email" />
+          <button type="submit" class="primary">Apply now</button>
+        </form>
+      </section>
+    </article>
+  `,
+            styleUrls: ['./details.component.css'],
+        })];
+    let _classDescriptor;
+    let _classExtraInitializers = [];
+    let _classThis;
+    var DetailsComponent = _classThis = class {
+        constructor() {
+            this.route = (0, core_1.inject)(router_1.ActivatedRoute);
+            this.housingService = (0, core_1.inject)(housing_service_1.HousingService);
+            this.applyForm = new forms_1.FormGroup({
+                firstName: new forms_1.FormControl(''),
+                lastName: new forms_1.FormControl(''),
+                email: new forms_1.FormControl(''),
+            });
+            const housingLocationId = parseInt(this.route.snapshot.params['id'], 10);
+            this.housingService.getHousingLocationById(housingLocationId).then((housingLocation) => {
+                this.housingLocation = housingLocation;
+            });
+        }
+        submitApplication() {
+            var _a, _b, _c;
+            this.housingService.submitApplication((_a = this.applyForm.value.firstName) !== null && _a !== void 0 ? _a : '', (_b = this.applyForm.value.lastName) !== null && _b !== void 0 ? _b : '', (_c = this.applyForm.value.email) !== null && _c !== void 0 ? _c : '');
+        }
+    };
+    __setFunctionName(_classThis, "DetailsComponent");
+    (() => {
+        const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
+        __esDecorate(null, _classDescriptor = { value: _classThis }, _classDecorators, { kind: "class", name: _classThis.name, metadata: _metadata }, null, _classExtraInitializers);
+        DetailsComponent = _classThis = _classDescriptor.value;
+        if (_metadata) Object.defineProperty(_classThis, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
+        __runInitializers(_classThis, _classExtraInitializers);
+    })();
+    return DetailsComponent = _classThis;
+})();
+exports.DetailsComponent = DetailsComponent;

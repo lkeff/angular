@@ -1,114 +1,95 @@
-function MyComponent_div_3_Template(rf, ctx) {
-  if (rf & 1) {
-      $r3$.ɵɵi18nStart(0, 0, 1);
-      $r3$.ɵɵelement(1, "div");
-      $r3$.ɵɵi18nEnd();
-  }
-  if (rf & 2) {
-    const $ctx_r0$ = $r3$.ɵɵnextContext();
-    $r3$.ɵɵadvance();
-    $r3$.ɵɵi18nExp($ctx_r0$.gender);
-    $r3$.ɵɵi18nApply(0);
-  }
-}
-…
-decls: 4,
-vars: 3,
-consts: () => {
-  // NOTE: Keeping raw content here to illustrate the difference in placeholders generated for goog.getMsg and $localize calls (see last i18n block).
-  let $I18N_1$;
-  if (typeof ngI18nClosureMode !== "undefined" && ngI18nClosureMode) {
-      /**
-       * @suppress {msgDescriptions}
-       */
-      const $MSG_APP_SPEC_TS_1$ = goog.getMsg("{VAR_SELECT, select, male {male} female {female} other {other}}");
-      $I18N_1$ = $MSG_APP_SPEC_TS_1$;
-  }
-  else {
-      $I18N_1$ = $localize `{VAR_SELECT, select, male {male} female {female} other {other}}`;
-  }
-  $I18N_1$ = $r3$.ɵɵi18nPostprocess($I18N_1$, {
-    "VAR_SELECT": "\uFFFD0\uFFFD"
-  });
-
-  let $I18N_2$;
-  if (typeof ngI18nClosureMode !== "undefined" && ngI18nClosureMode) {
-      /**
-       * @suppress {msgDescriptions}
-       */
-      const $MSG_APP_SPEC_TS_2$ = goog.getMsg("{VAR_SELECT, select, male {male} female {female} other {other}}");
-      $I18N_2$ = $MSG_APP_SPEC_TS_2$;
-  }
-  else {
-      $I18N_2$ = $localize `{VAR_SELECT, select, male {male} female {female} other {other}}`;
-  }
-  $I18N_2$ = $r3$.ɵɵi18nPostprocess($I18N_2$, {
-    "VAR_SELECT": "\uFFFD1\uFFFD"
-  });
-
-  let $I18N_4$;
-  if (typeof ngI18nClosureMode !== "undefined" && ngI18nClosureMode) {
-      /**
-       * @suppress {msgDescriptions}
-       */
-      const $MSG_APP_SPEC_TS__4$ = goog.getMsg("{VAR_SELECT, select, male {male} female {female} other {other}}");
-      $I18N_4$ = $MSG_APP_SPEC_TS__4$;
-  }
-  else {
-      $I18N_4$ = $localize `{VAR_SELECT, select, male {male} female {female} other {other}}`;
-  }
-  $I18N_4$ = $r3$.ɵɵi18nPostprocess($I18N_4$, {
-    "VAR_SELECT": "\uFFFD0:1\uFFFD"
-  });
-
-  let $I18N_0$;
-  if (typeof ngI18nClosureMode !== "undefined" && ngI18nClosureMode) {
-      /**
-       * @suppress {msgDescriptions}
-       */
-      const $MSG_APP_SPEC_TS_0$ = goog.getMsg(" {$icu} {$startTagDiv} {$icu} {$closeTagDiv}{$startTagDiv_1} {$icu} {$closeTagDiv}", {
-        "closeTagDiv": "[\uFFFD/#2\uFFFD|\uFFFD/#1:1\uFFFD\uFFFD/*3:1\uFFFD]",
-        "icu": "\uFFFDI18N_EXP_ICU\uFFFD",
-        "startTagDiv": "\uFFFD#2\uFFFD",
-        "startTagDiv_1": "\uFFFD*3:1\uFFFD\uFFFD#1:1\uFFFD"
-      }, {
-        original_code: {
-          "closeTagDiv": "</div>",
-          "icu": "{gender, select, male {male} female {female} other {other}}",
-          "startTagDiv": "<div>",
-          "startTagDiv_1": "<div *ngIf=\"visible\">"
+"use strict";
+var __esDecorate = (this && this.__esDecorate) || function (ctor, descriptorIn, decorators, contextIn, initializers, extraInitializers) {
+    function accept(f) { if (f !== void 0 && typeof f !== "function") throw new TypeError("Function expected"); return f; }
+    var kind = contextIn.kind, key = kind === "getter" ? "get" : kind === "setter" ? "set" : "value";
+    var target = !descriptorIn && ctor ? contextIn["static"] ? ctor : ctor.prototype : null;
+    var descriptor = descriptorIn || (target ? Object.getOwnPropertyDescriptor(target, contextIn.name) : {});
+    var _, done = false;
+    for (var i = decorators.length - 1; i >= 0; i--) {
+        var context = {};
+        for (var p in contextIn) context[p] = p === "access" ? {} : contextIn[p];
+        for (var p in contextIn.access) context.access[p] = contextIn.access[p];
+        context.addInitializer = function (f) { if (done) throw new TypeError("Cannot add initializers after decoration has completed"); extraInitializers.push(accept(f || null)); };
+        var result = (0, decorators[i])(kind === "accessor" ? { get: descriptor.get, set: descriptor.set } : descriptor[key], context);
+        if (kind === "accessor") {
+            if (result === void 0) continue;
+            if (result === null || typeof result !== "object") throw new TypeError("Object expected");
+            if (_ = accept(result.get)) descriptor.get = _;
+            if (_ = accept(result.set)) descriptor.set = _;
+            if (_ = accept(result.init)) initializers.unshift(_);
         }
-      });
-      $I18N_0$ = $MSG_APP_SPEC_TS_0$;
-  }
-  else {
-      $I18N_0$ = $localize ` ${"\uFFFDI18N_EXP_ICU\uFFFD"}:ICU@@7670372064920373295: ${"\uFFFD#2\uFFFD"}:START_TAG_DIV: ${"\uFFFDI18N_EXP_ICU\uFFFD"}:ICU@@7670372064920373295: ${"[\uFFFD/#2\uFFFD|\uFFFD/#1:1\uFFFD\uFFFD/*3:1\uFFFD]"}:CLOSE_TAG_DIV:${"\uFFFD*3:1\uFFFD\uFFFD#1:1\uFFFD"}:START_TAG_DIV_1: ${"\uFFFDI18N_EXP_ICU\uFFFD"}:ICU@@7670372064920373295: ${"[\uFFFD/#2\uFFFD|\uFFFD/#1:1\uFFFD\uFFFD/*3:1\uFFFD]"}:CLOSE_TAG_DIV:`;
-  }
-
-  $I18N_0$ = $r3$.ɵɵi18nPostprocess($I18N_0$, {
-    "ICU": [$I18N_1$, $I18N_2$, $I18N_4$]
-  });
-  return [
-    $i18n_0$,
-    [__AttributeMarker.Template__, "ngIf"]
-  ];
-},
-template: function MyComponent_Template(rf, ctx) {
-  if (rf & 1) {
-    $r3$.ɵɵelementStart(0, "div");
-    $r3$.ɵɵi18nStart(1, 0);
-    $r3$.ɵɵelement(2, "div");
-    $r3$.ɵɵtemplate(3, MyComponent_div_3_Template, 2, 1, "div", 1);
-    $r3$.ɵɵi18nEnd();
-    $r3$.ɵɵelementEnd();
-  }
-  if (rf & 2) {
-    $r3$.ɵɵadvance(3);
-    $r3$.ɵɵproperty("ngIf", ctx.visible);
-    $r3$.ɵɵi18nExp(ctx.gender)(ctx.gender);
-    $r3$.ɵɵi18nApply(1);
-  }
-}
-
-// NOTE: TODO(FW-635): this use-case is currently supported with file-based prefix for translation const names.
-// NOTE: Translation statements caching is required to support this use-case with id-based consts.
+        else if (_ = accept(result)) {
+            if (kind === "field") initializers.unshift(_);
+            else descriptor[key] = _;
+        }
+    }
+    if (target) Object.defineProperty(target, contextIn.name, descriptor);
+    done = true;
+};
+var __runInitializers = (this && this.__runInitializers) || function (thisArg, initializers, value) {
+    var useValue = arguments.length > 2;
+    for (var i = 0; i < initializers.length; i++) {
+        value = useValue ? initializers[i].call(thisArg, value) : initializers[i].call(thisArg);
+    }
+    return useValue ? value : void 0;
+};
+var __setFunctionName = (this && this.__setFunctionName) || function (f, name, prefix) {
+    if (typeof name === "symbol") name = name.description ? "[".concat(name.description, "]") : "";
+    return Object.defineProperty(f, "name", { configurable: true, value: prefix ? "".concat(prefix, " ", name) : name });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.MyModule = exports.MyComponent = void 0;
+const core_1 = require("@angular/core");
+let MyComponent = (() => {
+    let _classDecorators = [(0, core_1.Component)({
+            selector: 'my-component',
+            template: `
+  <div i18n>
+    {gender, select, male {male} female {female} other {other}}
+    <div>
+      {gender, select, male {male} female {female} other {other}}
+    </div>
+    <div *ngIf="visible">
+      {gender, select, male {male} female {female} other {other}}
+    </div>
+  </div>
+`,
+            standalone: false
+        })];
+    let _classDescriptor;
+    let _classExtraInitializers = [];
+    let _classThis;
+    var MyComponent = _classThis = class {
+        constructor() {
+            this.gender = 'male';
+        }
+    };
+    __setFunctionName(_classThis, "MyComponent");
+    (() => {
+        const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
+        __esDecorate(null, _classDescriptor = { value: _classThis }, _classDecorators, { kind: "class", name: _classThis.name, metadata: _metadata }, null, _classExtraInitializers);
+        MyComponent = _classThis = _classDescriptor.value;
+        if (_metadata) Object.defineProperty(_classThis, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
+        __runInitializers(_classThis, _classExtraInitializers);
+    })();
+    return MyComponent = _classThis;
+})();
+exports.MyComponent = MyComponent;
+let MyModule = (() => {
+    let _classDecorators = [(0, core_1.NgModule)({ declarations: [MyComponent] })];
+    let _classDescriptor;
+    let _classExtraInitializers = [];
+    let _classThis;
+    var MyModule = _classThis = class {
+    };
+    __setFunctionName(_classThis, "MyModule");
+    (() => {
+        const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
+        __esDecorate(null, _classDescriptor = { value: _classThis }, _classDecorators, { kind: "class", name: _classThis.name, metadata: _metadata }, null, _classExtraInitializers);
+        MyModule = _classThis = _classDescriptor.value;
+        if (_metadata) Object.defineProperty(_classThis, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
+        __runInitializers(_classThis, _classExtraInitializers);
+    })();
+    return MyModule = _classThis;
+})();
+exports.MyModule = MyModule;

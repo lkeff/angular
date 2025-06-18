@@ -1,47 +1,132 @@
-
-const _c0 = [[["", "card-title", ""]], [["", "card-content", ""]]];
-const _c1 = ["[card-title]", "[card-content]"];
-const _c2 = ["*"];
-// ...
-selectors: [["card"]],
-standalone: false,
-ngContentSelectors: _c1,
-decls: 3,
-vars: 0,
-template: function Card_Template(rf, ctx) {
-	if (rf & 1) {
-		i0.ɵɵprojectionDef(_c0);
-		i0.ɵɵprojection(0);
-		i0.ɵɵtext(1, " --- ");
-		i0.ɵɵprojection(2, 1);
-	}
-}
-// ...
-selectors: [["card-with-title"]],
-standalone: false,
-ngContentSelectors: _c2,
-decls: 4,
-vars: 0,
-consts: [["ngProjectAs", "[card-title]", 5, ["", "card-title", ""]]],
-template: function CardWithTitle_Template(rf, ctx) {
-	if (rf & 1) {
-		i0.ɵɵprojectionDef();
-		i0.ɵɵelementStart(0, "card")(1, "h1", 0);
-		i0.ɵɵtext(2, "Title");
-		i0.ɵɵelementEnd();
-		i0.ɵɵprojection(3, 0, ["ngProjectAs", "[card-content]", 5, ["", "card-content", ""]]);
-		i0.ɵɵelementEnd();
-	}
-}
-// ...
-selectors: [["app"]],
-standalone: false,
-decls: 2,
-vars: 0,
-template: function App_Template(rf, ctx) {
-	if (rf & 1) {
-		i0.ɵɵelementStart(0, "card-with-title");
-		i0.ɵɵtext(1, "content");
-		i0.ɵɵelementEnd();
-	}
-}
+"use strict";
+var __esDecorate = (this && this.__esDecorate) || function (ctor, descriptorIn, decorators, contextIn, initializers, extraInitializers) {
+    function accept(f) { if (f !== void 0 && typeof f !== "function") throw new TypeError("Function expected"); return f; }
+    var kind = contextIn.kind, key = kind === "getter" ? "get" : kind === "setter" ? "set" : "value";
+    var target = !descriptorIn && ctor ? contextIn["static"] ? ctor : ctor.prototype : null;
+    var descriptor = descriptorIn || (target ? Object.getOwnPropertyDescriptor(target, contextIn.name) : {});
+    var _, done = false;
+    for (var i = decorators.length - 1; i >= 0; i--) {
+        var context = {};
+        for (var p in contextIn) context[p] = p === "access" ? {} : contextIn[p];
+        for (var p in contextIn.access) context.access[p] = contextIn.access[p];
+        context.addInitializer = function (f) { if (done) throw new TypeError("Cannot add initializers after decoration has completed"); extraInitializers.push(accept(f || null)); };
+        var result = (0, decorators[i])(kind === "accessor" ? { get: descriptor.get, set: descriptor.set } : descriptor[key], context);
+        if (kind === "accessor") {
+            if (result === void 0) continue;
+            if (result === null || typeof result !== "object") throw new TypeError("Object expected");
+            if (_ = accept(result.get)) descriptor.get = _;
+            if (_ = accept(result.set)) descriptor.set = _;
+            if (_ = accept(result.init)) initializers.unshift(_);
+        }
+        else if (_ = accept(result)) {
+            if (kind === "field") initializers.unshift(_);
+            else descriptor[key] = _;
+        }
+    }
+    if (target) Object.defineProperty(target, contextIn.name, descriptor);
+    done = true;
+};
+var __runInitializers = (this && this.__runInitializers) || function (thisArg, initializers, value) {
+    var useValue = arguments.length > 2;
+    for (var i = 0; i < initializers.length; i++) {
+        value = useValue ? initializers[i].call(thisArg, value) : initializers[i].call(thisArg);
+    }
+    return useValue ? value : void 0;
+};
+var __setFunctionName = (this && this.__setFunctionName) || function (f, name, prefix) {
+    if (typeof name === "symbol") name = name.description ? "[".concat(name.description, "]") : "";
+    return Object.defineProperty(f, "name", { configurable: true, value: prefix ? "".concat(prefix, " ", name) : name });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const core_1 = require("@angular/core");
+let Card = (() => {
+    let _classDecorators = [(0, core_1.Component)({
+            selector: 'card',
+            template: `
+		<ng-content select="[card-title]"></ng-content>
+		---
+		<ng-content select="[card-content]"></ng-content>
+	`,
+            standalone: false
+        })];
+    let _classDescriptor;
+    let _classExtraInitializers = [];
+    let _classThis;
+    var Card = _classThis = class {
+    };
+    __setFunctionName(_classThis, "Card");
+    (() => {
+        const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
+        __esDecorate(null, _classDescriptor = { value: _classThis }, _classDecorators, { kind: "class", name: _classThis.name, metadata: _metadata }, null, _classExtraInitializers);
+        Card = _classThis = _classDescriptor.value;
+        if (_metadata) Object.defineProperty(_classThis, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
+        __runInitializers(_classThis, _classExtraInitializers);
+    })();
+    return Card = _classThis;
+})();
+let CardWithTitle = (() => {
+    let _classDecorators = [(0, core_1.Component)({
+            selector: 'card-with-title',
+            template: `
+		<card>
+			<h1 ngProjectAs="[card-title]">Title</h1>
+			<ng-content ngProjectAs="[card-content]"></ng-content>
+		</card>
+	`,
+            standalone: false
+        })];
+    let _classDescriptor;
+    let _classExtraInitializers = [];
+    let _classThis;
+    var CardWithTitle = _classThis = class {
+    };
+    __setFunctionName(_classThis, "CardWithTitle");
+    (() => {
+        const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
+        __esDecorate(null, _classDescriptor = { value: _classThis }, _classDecorators, { kind: "class", name: _classThis.name, metadata: _metadata }, null, _classExtraInitializers);
+        CardWithTitle = _classThis = _classDescriptor.value;
+        if (_metadata) Object.defineProperty(_classThis, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
+        __runInitializers(_classThis, _classExtraInitializers);
+    })();
+    return CardWithTitle = _classThis;
+})();
+let App = (() => {
+    let _classDecorators = [(0, core_1.Component)({
+            selector: 'app',
+            template: `
+		<card-with-title>content</card-with-title>
+	`,
+            standalone: false
+        })];
+    let _classDescriptor;
+    let _classExtraInitializers = [];
+    let _classThis;
+    var App = _classThis = class {
+    };
+    __setFunctionName(_classThis, "App");
+    (() => {
+        const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
+        __esDecorate(null, _classDescriptor = { value: _classThis }, _classDecorators, { kind: "class", name: _classThis.name, metadata: _metadata }, null, _classExtraInitializers);
+        App = _classThis = _classDescriptor.value;
+        if (_metadata) Object.defineProperty(_classThis, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
+        __runInitializers(_classThis, _classExtraInitializers);
+    })();
+    return App = _classThis;
+})();
+let Module = (() => {
+    let _classDecorators = [(0, core_1.NgModule)({ declarations: [Card, CardWithTitle, App] })];
+    let _classDescriptor;
+    let _classExtraInitializers = [];
+    let _classThis;
+    var Module = _classThis = class {
+    };
+    __setFunctionName(_classThis, "Module");
+    (() => {
+        const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
+        __esDecorate(null, _classDescriptor = { value: _classThis }, _classDecorators, { kind: "class", name: _classThis.name, metadata: _metadata }, null, _classExtraInitializers);
+        Module = _classThis = _classDescriptor.value;
+        if (_metadata) Object.defineProperty(_classThis, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
+        __runInitializers(_classThis, _classExtraInitializers);
+    })();
+    return Module = _classThis;
+})();

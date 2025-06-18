@@ -1,74 +1,104 @@
-function MyComponent_div_2_div_4_Template(rf, ctx) {
-  if (rf & 1) {
-    $r3$.ɵɵi18nStart(0, 0, 2);
-    $r3$.ɵɵelementStart(1, "div");
-    $r3$.ɵɵelement(2, "div");
-    $r3$.ɵɵelementEnd();
-    $r3$.ɵɵi18nEnd();
-  }
-  if (rf & 2) {
-    const $ctx_r2$ = $r3$.ɵɵnextContext(2);
-    $r3$.ɵɵadvance(2);
-    $r3$.ɵɵi18nExp($ctx_r2$.valueC)($ctx_r2$.valueD);
-    $r3$.ɵɵi18nApply(0);
-  }
-}
-function MyComponent_div_2_Template(rf, ctx) {
-  if (rf & 1) {
-    $r3$.ɵɵi18nStart(0, 0, 1);
-    $r3$.ɵɵelementStart(1, "div")(2, "div");
-    $r3$.ɵɵpipe(3, "uppercase");
-    $r3$.ɵɵtemplate(4, MyComponent_div_2_div_4_Template, 3, 2, "div", 1);
-    $r3$.ɵɵelementEnd()();
-    $r3$.ɵɵi18nEnd();
-  }
-  if (rf & 2) {
-    const $ctx_r0$ = $r3$.ɵɵnextContext();
-    $r3$.ɵɵadvance(4);
-    $r3$.ɵɵproperty("ngIf", $ctx_r0$.exists);
-    $r3$.ɵɵi18nExp($ctx_r0$.valueA)($r3$.ɵɵpipeBind1(3, 3, $ctx_r0$.valueB));
-    $r3$.ɵɵi18nApply(0);
-  }
-}
-…
-function MyComponent_div_3_Template(rf, ctx) {
-  if (rf & 1) {
-    $r3$.ɵɵi18nStart(0, 0, 3);
-    $r3$.ɵɵelementStart(1, "div");
-    $r3$.ɵɵelement(2, "div");
-    $r3$.ɵɵpipe(3, "uppercase");
-    $r3$.ɵɵelementEnd();
-    $r3$.ɵɵi18nEnd();
-  }
-  if (rf & 2) {
-    const $ctx_r1$ = $r3$.ɵɵnextContext();
-    $r3$.ɵɵadvance(3);
-    $r3$.ɵɵi18nExp($ctx_r1$.valueE + $ctx_r1$.valueF)($r3$.ɵɵpipeBind1(3, 2, $ctx_r1$.valueG));
-    $r3$.ɵɵi18nApply(0);
-  }
-}
-…
-decls: 4,
-vars: 2,
-consts: () => {
-  __i18nMsgWithPostprocess__(' Some content {$startTagDiv_2} Some other content {$interpolation} {$startTagDiv} More nested levels with bindings {$interpolation_1} {$startTagDiv_1} Content inside sub-template {$interpolation_2} {$startTagDiv} Bottom level element {$interpolation_3} {$closeTagDiv}{$closeTagDiv}{$closeTagDiv}{$closeTagDiv}{$startTagDiv_3} Some other content {$interpolation_4} {$startTagDiv} More nested levels with bindings {$interpolation_5} {$closeTagDiv}{$closeTagDiv}', [['closeTagDiv', String.raw`[\uFFFD/#2:2\uFFFD|\uFFFD/#1:2\uFFFD\uFFFD/*4:2\uFFFD|\uFFFD/#2:1\uFFFD|\uFFFD/#1:1\uFFFD\uFFFD/*2:1\uFFFD|\uFFFD/#2:3\uFFFD|\uFFFD/#1:3\uFFFD\uFFFD/*3:3\uFFFD]`], ['interpolation', String.raw`\uFFFD0:1\uFFFD`], ['interpolation_1', String.raw`\uFFFD1:1\uFFFD`], ['interpolation_2', String.raw`\uFFFD0:2\uFFFD`], ['interpolation_3', String.raw`\uFFFD1:2\uFFFD`], ['interpolation_4', String.raw`\uFFFD0:3\uFFFD`], ['interpolation_5', String.raw`\uFFFD1:3\uFFFD`], ['startTagDiv', String.raw`[\uFFFD#2:1\uFFFD|\uFFFD#2:2\uFFFD|\uFFFD#2:3\uFFFD]`], ['startTagDiv_1', String.raw`\uFFFD*4:2\uFFFD\uFFFD#1:2\uFFFD`], ['startTagDiv_2', String.raw`\uFFFD*2:1\uFFFD\uFFFD#1:1\uFFFD`], ['startTagDiv_3', String.raw`\uFFFD*3:3\uFFFD\uFFFD#1:3\uFFFD`]], {original_code: {'closeTagDiv': '</div>', 'interpolation': '{{ valueA }}', 'interpolation_1': '{{ valueB | uppercase }}', 'interpolation_2': '{{ valueC }}', 'interpolation_3': '{{ valueD }}', 'interpolation_4': '{{ valueE + valueF }}', 'interpolation_5': '{{ valueG | uppercase }}', 'startTagDiv': '<div>', 'startTagDiv_1': '<div *ngIf="exists">', 'startTagDiv_2': '<div *ngIf="visible">', 'startTagDiv_3': '<div *ngIf="!visible">',}}, {}, [])
-  return [
-    $i18n_0$,
-    [__AttributeMarker.Template__, "ngIf"]
-  ];
-},
-template: function MyComponent_Template(rf, ctx) {
-  if (rf & 1) {
-    $r3$.ɵɵelementStart(0, "div");
-    $r3$.ɵɵi18nStart(1, 0);
-    $r3$.ɵɵtemplate(2, MyComponent_div_2_Template, 5, 5, "div", 1)(3, MyComponent_div_3_Template, 4, 4, "div", 1);
-    $r3$.ɵɵi18nEnd();
-    $r3$.ɵɵelementEnd();
-  }
-  if (rf & 2) {
-    $r3$.ɵɵadvance(2);
-    $r3$.ɵɵproperty("ngIf", ctx.visible);
-    $r3$.ɵɵadvance();
-    $r3$.ɵɵproperty("ngIf", !ctx.visible);
-  }
-}
+"use strict";
+var __esDecorate = (this && this.__esDecorate) || function (ctor, descriptorIn, decorators, contextIn, initializers, extraInitializers) {
+    function accept(f) { if (f !== void 0 && typeof f !== "function") throw new TypeError("Function expected"); return f; }
+    var kind = contextIn.kind, key = kind === "getter" ? "get" : kind === "setter" ? "set" : "value";
+    var target = !descriptorIn && ctor ? contextIn["static"] ? ctor : ctor.prototype : null;
+    var descriptor = descriptorIn || (target ? Object.getOwnPropertyDescriptor(target, contextIn.name) : {});
+    var _, done = false;
+    for (var i = decorators.length - 1; i >= 0; i--) {
+        var context = {};
+        for (var p in contextIn) context[p] = p === "access" ? {} : contextIn[p];
+        for (var p in contextIn.access) context.access[p] = contextIn.access[p];
+        context.addInitializer = function (f) { if (done) throw new TypeError("Cannot add initializers after decoration has completed"); extraInitializers.push(accept(f || null)); };
+        var result = (0, decorators[i])(kind === "accessor" ? { get: descriptor.get, set: descriptor.set } : descriptor[key], context);
+        if (kind === "accessor") {
+            if (result === void 0) continue;
+            if (result === null || typeof result !== "object") throw new TypeError("Object expected");
+            if (_ = accept(result.get)) descriptor.get = _;
+            if (_ = accept(result.set)) descriptor.set = _;
+            if (_ = accept(result.init)) initializers.unshift(_);
+        }
+        else if (_ = accept(result)) {
+            if (kind === "field") initializers.unshift(_);
+            else descriptor[key] = _;
+        }
+    }
+    if (target) Object.defineProperty(target, contextIn.name, descriptor);
+    done = true;
+};
+var __runInitializers = (this && this.__runInitializers) || function (thisArg, initializers, value) {
+    var useValue = arguments.length > 2;
+    for (var i = 0; i < initializers.length; i++) {
+        value = useValue ? initializers[i].call(thisArg, value) : initializers[i].call(thisArg);
+    }
+    return useValue ? value : void 0;
+};
+var __setFunctionName = (this && this.__setFunctionName) || function (f, name, prefix) {
+    if (typeof name === "symbol") name = name.description ? "[".concat(name.description, "]") : "";
+    return Object.defineProperty(f, "name", { configurable: true, value: prefix ? "".concat(prefix, " ", name) : name });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.MyModule = exports.MyComponent = void 0;
+const core_1 = require("@angular/core");
+let MyComponent = (() => {
+    let _classDecorators = [(0, core_1.Component)({
+            selector: 'my-component',
+            template: `
+  <div i18n>
+    Some content
+    <div *ngIf="visible">
+      Some other content {{ valueA }}
+      <div>
+        More nested levels with bindings {{ valueB | uppercase }}
+        <div *ngIf="exists">
+          Content inside sub-template {{ valueC }}
+          <div>
+            Bottom level element {{ valueD }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!visible">
+      Some other content {{ valueE + valueF }}
+      <div>
+        More nested levels with bindings {{ valueG | uppercase }}
+      </div>
+    </div>
+  </div>
+`,
+            standalone: false
+        })];
+    let _classDescriptor;
+    let _classExtraInitializers = [];
+    let _classThis;
+    var MyComponent = _classThis = class {
+    };
+    __setFunctionName(_classThis, "MyComponent");
+    (() => {
+        const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
+        __esDecorate(null, _classDescriptor = { value: _classThis }, _classDecorators, { kind: "class", name: _classThis.name, metadata: _metadata }, null, _classExtraInitializers);
+        MyComponent = _classThis = _classDescriptor.value;
+        if (_metadata) Object.defineProperty(_classThis, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
+        __runInitializers(_classThis, _classExtraInitializers);
+    })();
+    return MyComponent = _classThis;
+})();
+exports.MyComponent = MyComponent;
+let MyModule = (() => {
+    let _classDecorators = [(0, core_1.NgModule)({ declarations: [MyComponent] })];
+    let _classDescriptor;
+    let _classExtraInitializers = [];
+    let _classThis;
+    var MyModule = _classThis = class {
+    };
+    __setFunctionName(_classThis, "MyModule");
+    (() => {
+        const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
+        __esDecorate(null, _classDescriptor = { value: _classThis }, _classDecorators, { kind: "class", name: _classThis.name, metadata: _metadata }, null, _classExtraInitializers);
+        MyModule = _classThis = _classDescriptor.value;
+        if (_metadata) Object.defineProperty(_classThis, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
+        __runInitializers(_classThis, _classExtraInitializers);
+    })();
+    return MyModule = _classThis;
+})();
+exports.MyModule = MyModule;

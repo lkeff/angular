@@ -1,65 +1,97 @@
-function MyComponent_ul_0_li_1_div_1_Template(rf, ctx) {
-	if (rf & 1) {
-	  const $s$ = $i0$.ɵɵgetCurrentView();
-	  $i0$.ɵɵelementStart(0, "div", 2);
-	  $i0$.ɵɵlistener("click", function MyComponent_ul_0_li_1_div_1_Template_div_click_0_listener(){
-		const $inner$ = $i0$.ɵɵrestoreView($s$).$implicit;
-		const $middle$ = $i0$.ɵɵnextContext().$implicit;
-		const $outer$ = $i0$.ɵɵnextContext().$implicit;
-		const $myComp$ = $i0$.ɵɵnextContext();
-		return $i0$.ɵɵresetView($myComp$.onClick($outer$, $middle$, $inner$));
-	  });
-	  $i0$.ɵɵtext(1);
-	  $i0$.ɵɵelementEnd();
-	}
-
-	if (rf & 2) {
-	  const $inner1$ = ctx.$implicit;
-	  const $middle1$ = $i0$.ɵɵnextContext().$implicit;
-	  const $outer1$ = $i0$.ɵɵnextContext().$implicit;
-	  const $myComp1$ = $i0$.ɵɵnextContext();
-	  $i0$.ɵɵproperty("title", $myComp1$.format($outer1$, $middle1$, $inner1$, $myComp1$.component));
-	  $r3$.ɵɵadvance();
-	  $i0$.ɵɵtextInterpolate1(" ", $myComp1$.format($outer1$, $middle1$, $inner1$, $myComp1$.component), " ");
-	}
-  }
-
-  function MyComponent_ul_0_li_1_Template(rf, ctx) {
-	if (rf & 1) {
-	  $i0$.ɵɵelementStart(0, "li");
-	  $i0$.ɵɵtemplate(1, MyComponent_ul_0_li_1_div_1_Template, 2, 2, "div", 1);
-	  $i0$.ɵɵelementEnd();
-	}
-	if (rf & 2) {
-	  const $myComp2$ = $i0$.ɵɵnextContext(2);
-	  $r3$.ɵɵadvance();
-	  $i0$.ɵɵproperty("ngForOf", $myComp2$.items);
-	}
-  }
-
-  function MyComponent_ul_0_Template(rf, ctx) {
-	if (rf & 1) {
-	  $i0$.ɵɵelementStart(0, "ul");
-	  $i0$.ɵɵtemplate(1, MyComponent_ul_0_li_1_Template, 2, 1, "li", 0);
-	  $i0$.ɵɵelementEnd();
-	}
-	if (rf & 2) {
-	  const $outer2$ = ctx.$implicit;
-	  $r3$.ɵɵadvance();
-	  $i0$.ɵɵproperty("ngForOf", $outer2$.items);
-	}
-  }
-  …
-  consts: [
-	[__AttributeMarker.Template__, "ngFor", "ngForOf"],
-	[__AttributeMarker.Bindings__, "title", "click", __AttributeMarker.Template__, "ngFor", "ngForOf"],
-	[__AttributeMarker.Bindings__, "click", "title"]
-  ],
-  template:function MyComponent_Template(rf, ctx){
-	if (rf & 1) {
-	  $i0$.ɵɵtemplate(0, MyComponent_ul_0_Template, 2, 1, "ul", 0);
-	}
-	if (rf & 2) {
-	  $i0$.ɵɵproperty("ngForOf", ctx.items);
-	}
-  }
+"use strict";
+var __esDecorate = (this && this.__esDecorate) || function (ctor, descriptorIn, decorators, contextIn, initializers, extraInitializers) {
+    function accept(f) { if (f !== void 0 && typeof f !== "function") throw new TypeError("Function expected"); return f; }
+    var kind = contextIn.kind, key = kind === "getter" ? "get" : kind === "setter" ? "set" : "value";
+    var target = !descriptorIn && ctor ? contextIn["static"] ? ctor : ctor.prototype : null;
+    var descriptor = descriptorIn || (target ? Object.getOwnPropertyDescriptor(target, contextIn.name) : {});
+    var _, done = false;
+    for (var i = decorators.length - 1; i >= 0; i--) {
+        var context = {};
+        for (var p in contextIn) context[p] = p === "access" ? {} : contextIn[p];
+        for (var p in contextIn.access) context.access[p] = contextIn.access[p];
+        context.addInitializer = function (f) { if (done) throw new TypeError("Cannot add initializers after decoration has completed"); extraInitializers.push(accept(f || null)); };
+        var result = (0, decorators[i])(kind === "accessor" ? { get: descriptor.get, set: descriptor.set } : descriptor[key], context);
+        if (kind === "accessor") {
+            if (result === void 0) continue;
+            if (result === null || typeof result !== "object") throw new TypeError("Object expected");
+            if (_ = accept(result.get)) descriptor.get = _;
+            if (_ = accept(result.set)) descriptor.set = _;
+            if (_ = accept(result.init)) initializers.unshift(_);
+        }
+        else if (_ = accept(result)) {
+            if (kind === "field") initializers.unshift(_);
+            else descriptor[key] = _;
+        }
+    }
+    if (target) Object.defineProperty(target, contextIn.name, descriptor);
+    done = true;
+};
+var __runInitializers = (this && this.__runInitializers) || function (thisArg, initializers, value) {
+    var useValue = arguments.length > 2;
+    for (var i = 0; i < initializers.length; i++) {
+        value = useValue ? initializers[i].call(thisArg, value) : initializers[i].call(thisArg);
+    }
+    return useValue ? value : void 0;
+};
+var __setFunctionName = (this && this.__setFunctionName) || function (f, name, prefix) {
+    if (typeof name === "symbol") name = name.description ? "[".concat(name.description, "]") : "";
+    return Object.defineProperty(f, "name", { configurable: true, value: prefix ? "".concat(prefix, " ", name) : name });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.MyModule = exports.MyComponent = void 0;
+const core_1 = require("@angular/core");
+let MyComponent = (() => {
+    let _classDecorators = [(0, core_1.Component)({
+            selector: 'my-component',
+            template: `
+    <ul *ngFor="let outer of items">
+      <li *ngFor="let middle of outer.items">
+        <div *ngFor="let inner of items"
+             (click)="onClick(outer, middle, inner)"
+             [title]="format(outer, middle, inner, component)"
+             >
+          {{format(outer, middle, inner, component)}}
+        </div>
+      </li>
+    </ul>`,
+            standalone: false
+        })];
+    let _classDescriptor;
+    let _classExtraInitializers = [];
+    let _classThis;
+    var MyComponent = _classThis = class {
+        constructor() {
+            this.component = this;
+        }
+        format(outer, middle, inner) { }
+        onClick(outer, middle, inner) { }
+    };
+    __setFunctionName(_classThis, "MyComponent");
+    (() => {
+        const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
+        __esDecorate(null, _classDescriptor = { value: _classThis }, _classDecorators, { kind: "class", name: _classThis.name, metadata: _metadata }, null, _classExtraInitializers);
+        MyComponent = _classThis = _classDescriptor.value;
+        if (_metadata) Object.defineProperty(_classThis, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
+        __runInitializers(_classThis, _classExtraInitializers);
+    })();
+    return MyComponent = _classThis;
+})();
+exports.MyComponent = MyComponent;
+let MyModule = (() => {
+    let _classDecorators = [(0, core_1.NgModule)({ declarations: [MyComponent] })];
+    let _classDescriptor;
+    let _classExtraInitializers = [];
+    let _classThis;
+    var MyModule = _classThis = class {
+    };
+    __setFunctionName(_classThis, "MyModule");
+    (() => {
+        const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
+        __esDecorate(null, _classDescriptor = { value: _classThis }, _classDecorators, { kind: "class", name: _classThis.name, metadata: _metadata }, null, _classExtraInitializers);
+        MyModule = _classThis = _classDescriptor.value;
+        if (_metadata) Object.defineProperty(_classThis, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
+        __runInitializers(_classThis, _classExtraInitializers);
+    })();
+    return MyModule = _classThis;
+})();
+exports.MyModule = MyModule;
