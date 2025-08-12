@@ -1,16 +1,31 @@
-import { Client, GatewayIntentBits, Attachment, Interaction } from 'discord.js';
+import {
+  Client,
+  GatewayIntentBits,
+  Interaction,
+  Message,
+  VoiceState,
+  ChannelType,
+  Guild,
+} from 'discord.js';
+import {
+  joinVoiceChannel,
+  createAudioPlayer,
+  createAudioResource,
+  entersState,
+  StreamType,
+  AudioPlayerStatus,
+  VoiceConnectionStatus,
+  VoiceConnection,
+} from '@discordjs/voice';
 import dotenv from 'dotenv';
 import OpenAI from 'openai';
-import axios from 'axios';
 import * as fs from 'fs';
 import * as path from 'path';
 
 dotenv.config();
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
+// --- OpenAI and Discord Clients ---
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -20,83 +35,175 @@ const client = new Client({
   ],
 });
 
-client.once('ready', () => {
-  console.log('Bot is ready!');
-});
+// --- State Management ---
+interface Conversation {
+  connection: VoiceConnection;
+  player: import('@discordjs/voice').AudioPlayer;
+  textChannelId: string;
+  messageQueue: string[];
+  isSpeaking: boolean;
+  history: { role: 'user' | 'assistant'; content: string }[];
+}
+const conversations = new Map<string, Conversation>();
 
-client.on('messageCreate', async (message) => {
+// --- Bot Logic ---
+
+client.once('ready', () => console.log('Bot is ready!'));
+
+client.on('messageCreate', async (message: Message) => {
   if (message.author.bot) return;
 
-  if (message.attachments.size > 0) {
-    const attachment = message.attachments.first();
-    if (attachment && attachment.contentType?.startsWith('audio/')) {
+  const guildId = message.guildId;
+  if (!guildId) return;
+
+  // Command Handling
+  if (message.content.startsWith('!')) {
+    handleCommand(message);
+    return;
+  }
+
+  const conversation = conversations.get(guildId);
+  // If bot is in a voice channel and monitoring this text channel
+  if (conversation && conversation.textChannelId === message.channel.id) {
+    // Add message to conversation history
+    conversation.history.push({ role: 'user', content: `${message.author.username}: ${message.content}` });
+    if (conversation.history.length > 10) {
+      conversation.history.shift(); // Keep history to the last 10 messages
+    }
+
+    // If bot is mentioned, trigger conversational AI
+    if (message.mentions.has(client.user!.id)) {
+      triggerConversationalAI(message, conversation);
+    } else {
+      // Otherwise, add to TTS queue
+      conversation.messageQueue.push(message.content);
+      processQueue(guildId);
+    }
+  }
+});
+
+async function handleCommand(message: Message) {
+  const [command] = message.content.slice(1).split(' ');
+  const guildId = message.guildId!;
+
+  if (command === 'join') {
+    const voiceChannel = message.member?.voice.channel;
+    if (voiceChannel && voiceChannel.type === ChannelType.GuildVoice) {
+      if (conversations.has(guildId)) {
+        message.reply("I'm already in a voice channel on this server.");
+        return;
+      }
       try {
-        const audioURL = attachment.url;
-        const response = await axios.get(audioURL, { responseType: 'arraybuffer' });
-        const audioBuffer = Buffer.from(response.data);
-
-        const tempDir = path.join(__dirname, 'temp');
-        if (!fs.existsSync(tempDir)) {
-          fs.mkdirSync(tempDir);
-        }
-
-        const tempFilePath = path.join(tempDir, attachment.name);
-        fs.writeFileSync(tempFilePath, audioBuffer);
-
-        const transcription = await openai.audio.transcriptions.create({
-          file: fs.createReadStream(tempFilePath),
-          model: 'whisper-1',
+        const connection = joinVoiceChannel({
+          channelId: voiceChannel.id,
+          guildId: voiceChannel.guild.id,
+          adapterCreator: voiceChannel.guild.voiceAdapterCreator,
         });
 
-        fs.unlinkSync(tempFilePath);
+        await entersState(connection, VoiceConnectionStatus.Ready, 30e3);
 
-        message.reply(`Transcription: ${transcription.text}`);
+        const player = createAudioPlayer();
+        connection.subscribe(player);
+
+        const conversation: Conversation = {
+          connection,
+          player,
+          textChannelId: message.channel.id,
+          messageQueue: [],
+          isSpeaking: false,
+          history: [],
+        };
+        conversations.set(guildId, conversation);
+
+        player.on(AudioPlayerStatus.Idle, () => {
+          conversation.isSpeaking = false;
+          processQueue(guildId);
+        });
+
+        player.on('error', (error) => {
+          console.error(`Audio player error in guild ${guildId}:`, error);
+          conversation.isSpeaking = false;
+          processQueue(guildId);
+        });
+        
+        message.reply(`Joined ${voiceChannel.name} and now monitoring this channel for messages.`);
+
       } catch (error) {
-        console.error('Error transcribing audio:', error);
-        message.reply('Sorry, I had trouble transcribing that audio.');
+        console.error(error);
+        message.reply('Failed to join the voice channel.');
       }
+    } else {
+      message.reply('You need to be in a voice channel to use this command!');
+    }
+  } else if (command === 'leave') {
+    const conversation = conversations.get(guildId);
+    if (conversation) {
+      conversation.connection.destroy();
+      conversations.delete(guildId);
+      message.reply('Left the voice channel.');
+    } else {
+      message.reply("I'm not in a voice channel on this server.");
     }
   }
-});
+}
 
-client.on('interactionCreate', async (interaction: Interaction) => {
-  if (!interaction.isCommand()) return;
+async function processQueue(guildId: string) {
+  const conversation = conversations.get(guildId);
+  if (!conversation || conversation.isSpeaking || conversation.messageQueue.length === 0) {
+    return;
+  }
 
-  const { commandName } = interaction;
+  conversation.isSpeaking = true;
+  const text = conversation.messageQueue.shift()!;
 
-  if (commandName === 'generate') {
-    const text = interaction.options.get('text')?.value as string;
+  try {
+    const speech = await openai.audio.speech.create({
+      model: 'tts-1',
+      voice: 'alloy',
+      input: text,
+    });
 
-    if (!text) {
-      await interaction.reply({ content: 'You need to provide text to generate audio.', ephemeral: true });
-      return;
-    }
+    const resource = createAudioResource(speech.body as any, { inputType: StreamType.WebmOpus });
+    conversation.player.play(resource);
 
+  } catch (error) {
+    console.error(`Error generating or playing audio in guild ${guildId}:`, error);
+    conversation.isSpeaking = false;
+    processQueue(guildId); // Try next item in queue
+  }
+}
+
+async function triggerConversationalAI(message: Message, conversation: Conversation) {
+    const guildId = message.guildId!;
     try {
-      await interaction.deferReply();
+        const prompt = `The following is a conversation in a Discord chat. The user "${message.author.username}" has just mentioned you. Respond to their message in a helpful and conversational way. 
 
-      const speech = await openai.audio.speech.create({
-        model: 'tts-1',
-        voice: 'alloy',
-        input: text,
-      });
+Conversation History:
+${conversation.history.map(h => `${h.role}: ${h.content}`).join('
+')}
 
-      const buffer = Buffer.from(await speech.arrayBuffer());
-      const tempDir = path.join(__dirname, 'temp');
-      if (!fs.existsSync(tempDir)) {
-        fs.mkdirSync(tempDir);
-      }
-      const tempFilePath = path.join(tempDir, 'speech.mp3');
-      fs.writeFileSync(tempFilePath, buffer);
+Your Response:`;
 
-      await interaction.editReply({ files: [tempFilePath] });
+        const response = await openai.chat.completions.create({
+            model: "gpt-3.5-turbo",
+            messages: [{ role: "system", content: prompt }],
+        });
 
-      fs.unlinkSync(tempFilePath);
+        const replyText = response.choices[0].message.content;
+        if (replyText) {
+            conversation.history.push({ role: 'assistant', content: replyText });
+            if (conversation.history.length > 10) {
+                conversation.history.shift();
+            }
+            // Add AI response to the front of the queue to be spoken immediately
+            conversation.messageQueue.unshift(replyText);
+            processQueue(guildId);
+        }
     } catch (error) {
-      console.error('Error generating audio:', error);
-      await interaction.editReply('Sorry, I had trouble generating that audio.');
+        console.error(`Error with conversational AI in guild ${guildId}:`, error);
+        message.reply("Sorry, I had a little trouble thinking of a response.");
     }
-  }
-});
+}
+
 
 client.login(process.env.DISCORD_TOKEN);
